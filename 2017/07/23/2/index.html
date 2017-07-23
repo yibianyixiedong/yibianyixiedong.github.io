@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="null">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  
+  <meta name="keywords" content="网站关键字">
+  <meta name="description" content="网站简介">
+  
+  <title>dong的博客</title>
+  
+    <!-- stylesheets list from config.yml -->
+    
+      <link rel="stylesheet" href="/css/materialize.min.css">
+    
+      <link rel="stylesheet" href="/css/main.min.css">
+    
+  
+  <style type="text/css">
+      html{
+          font-family: sans-serif;
+          font-weight: 300;
+      }
+      @font-face {
+          font-family: 'Material Icons';
+          font-style: normal;
+          font-weight: 400;
+          src: url(/fonts/MaterialIcons-Regular.eot);
+          src: url(/fonts/MaterialIcons-Regular.woff2) format('woff2'),
+          url(/fonts/MaterialIcons-Regular.woff) format('woff'),
+          url(/fonts/MaterialIcons-Regular.ttf) format('truetype')
+      }
+  </style>
+</head>
+<body>
+<div id="menu-box"><a href="javascript:void(0)" id="menu" data-activates="slide-out" class="button-collapse menu" ><span class="nav-btn"></span></a></div>
+<div id="menu-outer">
+  <div id="menu-inner">
+      <ul id="slide-out" class="side-nav" >
+    <div class="nav-header"  style="background-image: url(/images/header-bg.png);background-color:#26A69A">
+    <div class="header-box"><img src="/images/header.png" ondragstart="return false;"></div>
+    <p>dong</p>
+    <div class="nav-link">
+        
+        <a href="http://example.com" target="_blank"> <div class="link-box twitter"></div></a>
+        
+        
+        <a  href="http://yibianyixiedong" target="_blank"><div class="link-box github"></div></a>
+        
+        
+        <a href="mailto:http://example.com"><div class="link-box email"></div></a>
+        
+        
+        <a href="http://example.com" target="_blank"><div class="link-box weibo"></div></a>
+        
+        
+        <a href="http://example.com" target="_blank"> <div class="link-box zhihu"></div></a>
+        
+    </div>
+    <div class="nav-search">
+        <form id="search-form"> <!-- 搜索框相关 -->
+            <input type="text" id="local-search-input" name="q" results="0" placeholder="搜索..." class="search form-control" autocomplete="off" autocorrect="off"/>
+            <div class="nav-search-img"><i class="material-icons">search</i></div>
+        </form>
+        <div id="local-search-result"></div> <!-- 搜索结果区 -->
+        <p class='no-result'>无搜索结果</p>
+    </div>
+</div>
+    <!--Homepage-->
+
+<li class="nav-list">
+    <a href="/" target="_self">
+        <div class="nav-ico"><i class="material-icons">home</i> </div><p>主页</p>
+    </a>
+</li>
+
+<!--archives-->
+
+<li class="nav-list dropdown-btn">
+    <a  class=""  target="_self">
+        <div class="nav-ico"><i class="material-icons">assignment</i></div><p>归档</p><div class="dropdown-ico"><i class="material-icons">arrow_drop_down</i></div>
+    </a>
+</li>
+
+<ul class="dropdown-menu dropdown" >
+    <li class="nav-dropdown-list">
+        <a class="archive-link" href="/archives/2017/07/">July 2017<span class="archive-count">2</span></a>
+    </li>
+</ul>
+<!--categories-->
+
+<ul class="dropdown-menu dropdown" >
+    <li class="nav-dropdown-list">
+        
+    </li>
+</ul>
+<!--tags-->
+
+<li class="nav-list">
+    <a href="/archives" target="_self">
+        <div class="nav-ico"><i class="material-icons">bookmark</i> </div><p>标签</p>
+    </a>
+</li>
+
+<!--photo-->
+
+<!--friends-->
+
+<!--about-->
+
+
+</ul>
+
+  </div>
+</div>
+
+<div id="content-outer">
+  <div id="content-inner">
+    
+<article id="post">
+  <div class="post-page-title"  style="background-color:#26A69A;background-image:url(/images/random/vateral-19.png)" >
+  <h2>WEB前端性能优化总结</h2>
+    
+  <p>作者:dong &nbsp&nbsp 发布于:<time datetime="2017-07-23T06:46:33.071Z">
+          2017-07-23
+    </time>
+  </p>
+    
+  </div>
+  <div class="post-page-content">
+  <h2 id="WEB前端性能优化总结"><a href="#WEB前端性能优化总结" class="headerlink" title="WEB前端性能优化总结"></a>WEB前端性能优化总结</h2><p>   1.减少http请求,合理设置HTTP缓存</p>
+<pre><code>a .
+** http协议是无状态的应用层协议，意味着每次http请求都需要建立通信链路、进行数据传输，而在服务器端，每个http都需要启动独立的线程去处理。这些通信和服务的开销都很昂贵，减少http请求的数目可有效提高访问性能。
+** 减少http的主要手段是合并CSS、合并javascript、合并图片。将浏览器一次访问需要的javascript和CSS合并成一个文件，这样浏览器就只需要一次请求。图片也可以合并，多张图片合并成一张，如果每张图片都有不同的超链接，可通过CSS偏移响应鼠标点击操作，构造不同的URL。
+** 缓存的力量是强大的，恰当的缓存设置可以大大的减少 HTTP请求。假设某网站首页，当浏览器没有缓存的时候访问一共会发出 78个请求，共 600多 K数据，而当第二次访问即浏览器已缓存之后访问则仅有 10个请求，共 20多 K数据。 (这里需要说明的是，如果直接 F5刷新页面的话效果是不一样的，这种情况下请求数还是一样，不过被缓存资源的请求服务器是 304响应，只有 Header没有Body，可以节省带宽 )
+** 怎样才算合理设置 ?原则很简单，能缓存越多越好，能缓存越久越好。例如，很少变化的图片资源可以直接通过 HTTP Header中的Expires设置一个很长的过期头 ;变化不频繁而又可能会变的资源可以使用 Last-Modifed来做请求验证。尽可能的让资源能够在缓存中待得更久。关于 HTTP缓存的具体设置和原理此处就不再详述了。
+
+b. 基本原理：
+
+在浏览器(客户端)和服务器发生通信时，就已经消耗了大量的时间，尤其是在网络情况比较糟糕的时候，这个问题尤其的突出。
+
+一个正常HTTP请求的流程简述：如在浏览器中输入&quot;www.xxxxxx.com&quot;并按下回车，浏览器再与这个URL指向的服务器建立连接，然后浏览器才能向服务器发送请求信息，服务器在接受到请求的信息后再返回相应的信息，浏览器接收到来自服务器的应答信息后，对这些数据解释执行。
+
+而当我们请求的网页文件中有很多图片、CSS、JS甚至音乐等信息时，将会频繁的与服务器建立连接，与释放连接，这必定会造成资源的浪费，且每个HTTP请求都会对服务器和浏览器产生性能负担。
+
+网速相同的条件下，下载一个100KB的图片比下载两个50KB的图片要快。所以，请减少HTTP请求。
+
+解决办法：
+
+合并图片（css sprites），合并CSS和JS文件；图片较多的页面也可以使用 lazyLoad 等技术进行优化。
+
+2、使用浏览器缓存
+
+** 对一个网站而言，CSS、javascript、logo、图标这些静态资源文件更新的频率都比较低，而这些文件又几乎是每次http请求都需要的，如果将这些文件缓存在浏览器中，可以极好的改善性能。通过设置http头中的cache-control和expires的属性，可设定浏览器缓存，缓存时间可以是数天，甚至是几个月。
+** 在某些时候，静态资源文件变化需要及时应用到客户端浏览器，这种情况，可通过改变文件名实现，即更新javascript文件并不是更新javascript文件内容，而是生成一个新的JS文件并更新HTML文件中的引用。
+** 使用浏览器缓存策略的网站在更新静态资源时，应采用逐量更新的方法，比如需要更新10个图标文件，不宜把10个文件一次全部更新，而是应该一个文件一个文件逐步更新，并有一定的间隔时间，以免用户浏览器忽然大量缓存失效，集中更新缓存，造成服务器负载骤增、网络堵塞的情况。
+
+3、启用压缩
+
+** 在服务器端对文件进行压缩，在浏览器端对文件解压缩，可有效减少通信传输的数据量。如果可以的话，尽可能的将外部的脚本、样式进行合并，多个合为一个。文本文件的压缩效率可达到80%以上，因此HTML、CSS、javascript文件启用GZip压缩可达到较好的效果。但是压缩对服务器和浏览器产生一定的压力，在通信带宽良好，而服务器资源不足的情况下要权衡考虑。
+
+4、CSS Sprites
+
+** 合并 CSS图片，减少请求数的又一个好办法。
+
+压缩图片和使用图片Sprite技术
+基本原理:
+
+注：其实压缩图片和图片精灵是两个方面的技术，可是既然都是关于图片的优化还是放到一块吧。
+
+现在由于工作的细分，专业的前端工程师已经少有机会去切图了，可是关于图片压缩还是得略微了解，一般图片压缩的方式有：
+
+    1.缩小图片分辨率；
+
+    2.改变图片格式；
+
+    3.降低图片保存质量。
+
+    关于图片精灵(Sprite)技术就和我们工作直接相关，不管是在CSS中的图片还是在HTML结构中的图片都会产生HTTP请求，前端优化的第一条就是减少请求数，最直接有效的方法是使用图片精灵（CSS Sprite）。图片精灵就是把许多图片放到一张大图片里面，通过CSS来显示图片的一部分。
+
+    至于图片精灵的操作细节就不多做介绍了，网上相关内容很多。
+
+5、LazyLoad Images
+
+** 这条策略实际上并不一定能减少 HTTP请求数，但是却能在某些条件下或者页面刚加载时减少 HTTP请求数。对于图片而言，在页面刚加载的时候可以只加载第一屏，当用户继续往后滚屏的时候才加载后续的图片。这样一来，假如用户只对第一屏的内容感兴趣时，那剩余的图片请求就都节省了。
+
+6、CSS放在页面最上部，javascript放在页面最下面
+
+** 浏览器会在下载完成全部CSS之后才对整个页面进行渲染，因此最好的做法是将CSS放在页面最上面，让浏览器尽快下载CSS。如果将 CSS放在其他地方比如 BODY中，则浏览器有可能还未下载和解析到 CSS就已经开始渲染页面了，这就导致页面由无 CSS状态跳转到 CSS状态，用户体验比较糟糕，所以可以考虑将CSS放在HEAD中。
+** Javascript则相反，浏览器在加载javascript后立即执行，有可能会阻塞整个页面，造成页面显示缓慢，因此javascript最好放在页面最下面。但如果页面解析时就需要用到javascript，这时放到底部就不合适了。
+** Lazy Load Javascript（只有在需要加载的时候加载，在一般情况下并不加载信息内容。）随着 Javascript框架的流行，越来越多的站点也使用起了框架。不过，一个框架往往包括了很多的功能实现，这些功能并不是每一个页面都需要的，如果下载了不需要的脚本则算得上是一种资源浪费 -既浪费了带宽又浪费了执行花费的时间。目前的做法大概有两种，一种是为那些流量特别大的页面专门定制一个专用的 mini版框架，另一种则是 Lazy Load。
+
+7、异步请求Callback（就是将一些行为样式提取出来，慢慢的加载信息的内容）在某些页面中可能存在这样一种需求，需要使用 script标签来异步的请求数据。类似：
+    [javascript] view plain copy print?
+    &lt;span style=&quot;font-size:14px;&quot;&gt;/*Callback 函数*/  
+    function myCallback(info){   
+    //do something here   
+    }   
+</code></pre><p>　       HTML:<br>　　      Callback返回的内容 :<br>        myCallback(‘Hello world!’);<br>         </p>
+<pre><code>    像以上这种方式直接在页面上写 &lt;script&gt; 对页面的性能也是有影响的，即增加了页面首次加载的负担，推迟了 DOMLoaded和window.onload 事件的触发时机。如果时效性允许的话，可以考虑在 DOMLoaded事件触发的时候加载，或者使用 setTimeout方式来灵活的控制加载的时机。
+
+8、减少cookie传输
+
+** 一方面，cookie包含在每次请求和响应中，太大的cookie会严重影响数据传输，因此哪些数据需要写入cookie需要慎重考虑，尽量减少cookie中传输的数据量。另一方面，对于某些静态资源的访问，如CSS、script等，发送cookie没有意义，可以考虑静态资源使用独立域名访问，避免请求静态资源时发送cookie，减少cookie传输次数。
+
+9、Javascript代码优化
+
+(1). DOM
+　　
+a.HTML Collection（HTML收集器，返回的是一个数组内容信息）
+</code></pre><p>　　   ** 在脚本中 document.images、document.forms、getElementsByTagName()返回的都是HTMLCollection类型的集合，在平时使用       的时候大多将它作为数组来使用,因为它有 length属性，也可以使用索引访问每一个元素。不过在访问性能上则比数组要差很多，原因是       这个集合并不是一个静态的结果，它表示的仅仅是一个特定的查  询，每次访问该集合时都会重新执行这个查询从而更新查询结果。所谓       的“访问集合” 包括读取集合的 length属性、访问集合中的元素。</p>
+<p>　　  ** 因此，当你需要遍历 HTML Collection的时候，尽量将它转为数组后再访问，以提高性能。即使不转换为数组，也请尽可能少的访问       它，例如在遍历的时候可以将 length属性、成员保存到局部变量后再使用局部变量。　　 </p>
+<pre><code>b. Reflow &amp; Repaint
+　　 
+</code></pre><p>　　    除了上面一点之外， DOM操作还需要考虑浏览器的Reflow和Repaint ，因为这些都是需要消耗资源的。<br>        (2). 慎用 with　<br>        with(obj){ p = 1}; 代码块的行为实际上是修改了代码块中的执行环境 ，将obj放在了其作用域链的最前端，在 with代码块中访问非局部变量是都是先从 obj上开始查找，如果没有再依次按作用域链向上查找，因此使用 with相当于增加了作用域链长度。而每次查找作用域链都是要消耗时间的，过长的作用域链会导致查找性能下降。<br>　　      因此，除非你能肯定在 with代码中只访问 obj中的属性，否则慎用 with，替代的可以使用局部变量缓存需要访问的属性。<br>        (3). 避免使用 eval和 Function<br>        每次 eval 或Function 构造函数作用于字符串表示的源代码时，脚本引擎都需要将源代码转换成可执行代码。这是很消耗资源的操作 —— 通常比简单的函数调用慢 100倍以上。 </p>
+<p>　　      eval 函数效率特别低，由于事先无法知晓传给 eval 的字符串中的内容，eval在其上下文中解释要处理的代码，也就是说编译器无           法优化上下文，因此只能有浏览器在运行时解释代码。这对性能影响很大。<br>　　     Function 构造函数比 eval略好，因为使用此代码不会影响周围代码 ;但其速度仍很慢。<br>　　     此外，使用 eval和 Function也不利于Javascript 压缩工具执行压缩。<br>        (4). 减少作用域链查找<br>        前文谈到了作用域链查找问题，这一点在循环中是尤其需要注意的问题。如果在循环中需要访问非本作用域下的变量时请在遍历之前用局部变量缓存该变量，并在遍历结束后再重写那个变量，这一点对全局变量尤其重要，因为全局变量处于作用域链的最顶端，访问时的查找次数是最多的。<br>        低效率的写法：<br>        [javascript] view plain copy print?<br>        <span style="font-size:14px;">// 全局变量<br>        var globalVar = 1;<br>        function myCallback(info){<br>            for( var i = 100000; i–;){<br>            //每次访问 globalVar 都需要查找到作用域链最顶端，本例中需要访问 100000 次<br>                globalVar += i;<br>            }<br>        }<br>        </span>  </p>
+<pre><code>更高效的写法：
+[javascript] view plain copy print?
+&lt;span style=&quot;font-size:14px;&quot;&gt;// 全局变量   
+var globalVar = 1;   
+function myCallback(info){   
+    //局部变量缓存全局变量   
+    var localVar = globalVar;   
+    for( var i = 100000; i--;){   
+    //访问局部变量是最快的   
+        localVar += i;   
+    }   
+    //本例中只需要访问 2次全局变量  
+    在函数中只需要将 globalVar中内容的值赋给localVar 中  
+ globalVar = localVar;   
+}  
+&lt;/span&gt;  
+
+此外，要减少作用域链查找还应该减少闭包的使用。
+(5). 数据访问
+</code></pre><p>　　      Javascript中的数据访问包括直接量 (字符串、正则表达式 )、变量、对象属性以及数组，其中对直接量和局部变量的访问是最快的，对对象属性以及数组的访问需要更大的开销。当出现以下情况时，建议将数据放入局部变量：<br>　　      a. 对任何对象属性的访问超过 1次<br>　　      b. 对任何数组成员的访问次数超过 1次<br>　　      另外，还应当尽可能的减少对对象以及数组深度查找。<br>        (6). 字符串拼接<br>            在 Javascript中使用”+”号来拼接字符串效率是比较低的，因为每次运行都会开辟新的内存并生成新的字符串变量，然后将拼接结果赋值给新变量。与之相比更为高效的做法是使用数组的 join方法，即将需要拼接的字符串放在数组中最后调用其 join方法得到结果。不过由于使用数组也有一定的开销，因此当需要拼接的字符串较多的时候可以考虑用此方法。</p>
+<pre><code>10、CSS选择符优化
+
+    在大多数人的观念中，都觉得浏览器对 CSS选择符的解析式从左往右进行的，例如
+
+    #toc A { color: #444; }这样一个选择符，如果是从右往左解析则效率会很高，因为第一个 ID选择基本上就把查找的范围限定了，但实际上浏览器对选择符的解析是从右往左进行的。如上面的选择符，浏览器必须遍历查找每一个 A标签的祖先节点，效率并不像之前想象的那样高。根据浏览器的这一行为特点，在写选择符的时候需要注意很多事项，有兴趣的童鞋可以去了解一下。
+
+    CDN加速
+
+    CDN（contentdistribute network，内容分发网络）的本质仍然是一个缓存，而且将数据缓存在离用户最近的地方，使用户以最快速度获取数据，即所谓网络访问第一跳，如下图。
+
+    由于CDN部署在网络运营商的机房，这些运营商又是终端用户的网络服务提供商，因此用户请求路由的第一跳就到达了CDN服务器，当CDN中存在浏览器请求的资源时，从CDN直接返回给浏览器，最短路径返回响应，加快用户访问速度，减少数据中心负载压力。 
+    CDN缓存的一般是静态资源，如图片、文件、CSS、script脚本、静态网页等，但是这些文件访问频度很高，将其缓存在CDN可极大改善网页的打开速度。
+
+    反向代理
+    传统代理服务器位于浏览器一侧，代理浏览器将http请求发送到互联网上，而反向代理服务器位于网站机房一侧，代理网站web服务器接收http请求。如下图所示：
+
+    论坛网站，把热门词条、帖子、博客缓存在反向代理服务器上加速用户访问速度，当这些动态内容有变化时，通过内部通知机制通知反向代理缓存失效，反向代理会重新加载最新的动态内容再次缓存起来。
+
+    此外，反向代理也可以实现负载均衡的功能，而通过负载均衡构建的应用集群可以提高系统总体处理能力，进而改善网站高并发情况下的性能。
+
+11、请正确理解 Repaint 和 Reflow
+
+注：Repaint 和 Reflow 也就是重绘和重排，请允许我在这卖弄下我有限认识的那么几个英语单词...囧
+
+基本原理：
+
+Repaint(重绘)就是在一个元素的外观被改变，但没有改变布局(宽高)的情况下发生，如改变visibility、outline、背景色等等。
+
+Reflow(重排)就是DOM的变化影响到了元素的几何属性（宽和高），浏览器会重新计算元素的几何属性，会使渲染树中受到影响的部分失效，浏览器会验证DOM树上的所有其它结点的visibility属性，这也是Reflow低效的原因。如：改变窗囗大小、改变文字大小、内容的改变、浏览器窗口变化，style属性的改变等等。如果Reflow的过于频繁，CPU使用率就会噌噌的往上涨，所以前端也就有必要知道 Repaint 和 Reflow的知识。
+
+减少性能影响的办法：
+
+上面提到通过设置style属性改变结点样式的话，每设置一次都会导致一次reflow，所以最好通过设置class的方式； 有动画效果的元素，它的position属性应当设为fixed或absolute，这样不会影响其它元素的布局；如果功能需求上不能设置position为fixed或absolute，那么就权衡速度的平滑性。
+
+总之，因为 Reflow 有时确实不可避免，所以只能尽可能限制Reflow的影响范围。 
+
+12、请减少对DOM的操作
+
+基本原理：
+
+对DOM操作的代价是高昂的，这在网页应用中的通常是一个性能瓶颈。
+
+天生就慢。在《高性能JavaScript》中这么比喻：“把DOM看成一个岛屿，把JavaScript(ECMAScript)看成另一个岛屿，两者之间以一座收费桥连接”。所以每次访问DOM都会教一个过桥费，而访问的次数越多，交的费用也就越多。所以一般建议尽量减少过桥次数。
+
+解决办法：
+
+修改和访问DOM元素会造成页面的Repaint和Reflow，循环对DOM操作更是罪恶的行为。所以请合理的使用JavaScript变量储存内容，考虑大量DOM元素中循环的性能开销，在循环结束时一次性写入。
+
+减少对DOM元素的查询和修改，查询时可将其赋值给局部变量。
+
+注：在IE中:hover会降低响应速度。
+
+13、使用JSON格式来进行数据交换
+
+基本原理：
+
+JSON是一种轻量级的数据交换格式，采用完全独立于语言的文本格式，是理想的数据交换格式。同时，JSON是 JavaScript原生格式，这意味着在 JavaScript 中处理 JSON数据不需要任何特殊的 API 或工具包。
+
+与XML序列化相比，JSON序列化后产生的数据一般要比XML序列化后数据体积小，所以在Facebook等知名网站中都采用了JSON作为数据交换方式。
+
+JS操作JSON：
+
+在JSON中，有两种结构： 对象和数组。
+
+一个对象以 “ { ” 开始，“ } ” 结束。每个“名称”后跟一个 “ : ” ；“名称/值 对”之间使用 “ , ”（逗号）分隔。 名称用引号括起来；值如果是字符串则必须用引号括起来，数值型则不需要。如：
+var obj={&quot;name&quot;:&quot;darren&quot;,&quot;age&quot;:24,&quot;location&quot;:&quot;beijing&quot;}
+
+数组是值（value）的有序集合。一个数组以 “ [ ” 开始， “ ] ” 结束。值之间使用 “ , ” （逗号）分隔。如：
+var jsonlist=[{&quot;name&quot;:&quot;darren&quot;,&quot;age&quot;:24,&quot;location&quot;:&quot;beijing&quot;},{&quot;name&quot;:&quot;weidong.nie&quot;,&quot;age&quot;:24,&quot;location&quot;:&quot;hunan&quot;}];
+
+对这种数组和对象字面量的操作是非常方便且高效的。如果预先知道JSON结构的情况下，使用JSON进行数据传递简直是太美妙了，可以写出很实用美观可读性强的代码。如果你是纯粹的前台开发人员，一定会非常喜欢JSON。
+
+14、高效使用HTML标签和CSS样式
+
+基本原理：
+
+HTML是一门用来描述网页的一种语言，它使用标记标签来描述网页，作为一名合格的前端开发，你有必要去知道其常用标签代表的含义(SEO)和属性(表现形式)。
+
+CSS指层叠样式表 (Cascading Style Sheets)，如果说把页面想象成一个人，HTML就是人的骨架，CSS就是人的衣装，一个人的品味从他的衣装就能一目了然。
+
+一名专业的前端开发也是一名优秀的重构，因为在页面中经常会有各种不合理的嵌套和重复定义的CSS样式，我不是要你重构页面，只是希望你在碰到这种情况的时候解决这些问题。如这样的
+
+&lt;font size=&quot;3&quot;&gt;HTML： 1
+2
+3 ... 4
+5&lt;/font&gt;
+复制代码
+或者这样的CSS:
+
+
+&lt;font size=&quot;3&quot;&gt;body .box .border ul li p strong span{color:#000}&lt;/font&gt;
+复制代码
+
+以上都是对HTML和CSS非常糟糕的使用方法。 
+正确理解：
+
+HTML是一门标记语言，使用合理的HTML标签前你必须了解其属性，比如Flow Elements，Metadata Elements ，Phrasing Elements。比较基础的就是得知道块级元素和内联元素、盒模型、SEO方面的知识。
+
+CSS是用来渲染页面的，也是存在渲染效率的问题。CSS选择符是从右向左进行匹配的，这里对css选择符按照开销从小到大的顺序梳理一下：
+
+ID选择符 #box
+
+类选择符 .box
+
+标签 div
+
+伪类和伪元素 a:hover
+
+当页面被触发引起回流（reflow）的时候，低效的选择符依然会引发更高的开销，所以请避免低效。
+
+15、精简CSS和JS文件 
+
+基本原理：
+有一条非常重要的准则一直没有提到，就是CSS和JavaScript的压缩，直接减少下载的文件体积。我个人经常使用的方式是使用 YUI Compressor，它的特点是：移除注释；移除额外的空格；细微优化；标识符替换。
+
+YUI Compressor是java程序，如果你对java很熟悉的话可快速的上手使用yuicompressor.jar；如果你对java很陌生也没关系，一样可以使用YUI Compressor，下面介绍其使用方式。 YUI Compressor的配置和使用：
+
+先配置使用环境：
+
+1.先确保电脑中是否安装了JDK
+
+2.再配置必要的环境变量(细节不能三两句说清，所以不知道如何设置还是搜索吧)
+
+3.在cmd界面，输入javac可测试是否安装成功
+
+使用方法可从cmd到进入yuicompressor.jar所在磁盘，我以自己的yuicompressor-2.4.2.jar为例：
+
+1.压缩JS
+
+java -jar yuicompressor-2.4.2.jar api.js &gt; api.min.js
+
+2.压缩CSS
+
+java -jar yuicompressor-2.4.2.jar style.css &gt; style.min.css
+
+Web前端性能优化
+
+当然，还有另一种更傻瓜式的使用方式，赶兴趣的朋友自己可去多尝试下。
+</code></pre>
+  </div>
+  <!--评论块-->
+    
+
+</article>
+<nav class="post-nav">
+  <!-- Prev Nav -->
+    
+
+
+  <!-- Next Nav -->
+    
+  <a href="/2017/07/23/hello-world/" id="post_nav-older" class="post-nav-content next-content">
+      旧篇
+  </a>
+    
+</nav>
+<div class="post-toc-btn"><i class="material-icons">format_list_numbered</i></div>
+<div class="post-toc-none"><p>(无)</p></div>
+<div class="post-toc-box">
+    <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#WEB前端性能优化总结"><span class="post-toc-number">1.</span> <span class="post-toc-text">WEB前端性能优化总结</span></a></li></ol>
+</div>
+<!--<div class="post-back"><i class="material-icons">arrow_back</i></div>-->
+<script type="text/javascript">
+    menu();
+</script>
+  </div>
+</div>
+<div id="bottom-outer">
+  <div id="bottom-inner">
+    <a  id="top-button" onfocus="this.blur();"><div class="up upinbody" style="background-color:#26A69A"><i class="material-icons material-up">vertical_align_top</i></div></a>
+
+
+<p style="line-height: 45px">Copyright ©  2017  dong的博客</p>
+<p style="line-height: 45px">Powered by <a href="https://hexo.io/" target="_blank"> Hexo </a> && Theme - <a href="https://github.com/moumao/hexo-theme-Vateral" target="_blank">Vateral</a></p>
+
+  </div>
+</div>
+
+<!--影集界面需要的资源-->
+
+
+
+<!-- scripts list from theme config.yml -->
+
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+<script src="/js/materialize.min.js"></script>
+
+<script src="/js/main.min.js"></script>
+
+
+<script>
+    NProgress.start();
+    NProgress.done();
+    lazy();
+    links();
+    window.onpopstate = menu();
+    //pjax操作
+    $(document).pjax('a:not(.nopjax)', '#content-inner', {fragment:'#content-inner', timeout:8000});
+    $(document).on('pjax:start', NProgress.start).on('pjax:end', NProgress.done)
+        .on('pjax:end', () => {
+            dowmdiv();
+            lazy();
+            toc();
+            links();
+            menu();
+        });
+</script>
+
+</body>
+</html>
